@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editable install metadata
+*.dist-info/
+*.egg-info/
+
+# Virtual environment
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TensorBoard logs
+models/tensorboard_logs/
+
+# Trained models
+models/*.keras
+
+# Dataset
+ds/
