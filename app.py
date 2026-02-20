@@ -6,9 +6,9 @@ Launch with:
 
 Pages
 -----
-1. 🩺 Predict   — upload a facial image → prediction + Grad-CAM
-2. 📊 Dataset   — explore class distributions & sample images from the CSV
-3. 🚀 Train     — kick off training from the browser (optional)
+1.  Predict   — upload a facial image → prediction + Grad-CAM
+2.  Dataset   — explore class distributions & sample images from the CSV
+3.  Train     — kick off training from the browser (optional)
 """
 
 import streamlit as st
@@ -33,7 +33,6 @@ from src.gradcam import compute_gradcam_for_image
 
 st.set_page_config(
     page_title="Down Syndrome Detection",
-    page_icon="🧬",
     layout="wide",
 )
 
@@ -77,11 +76,11 @@ def preprocess_uploaded_image(uploaded_file) -> tuple[np.ndarray, Image.Image]:
 # ---------------------------------------------------------------------------
 
 with st.sidebar:
-    st.header("⚙️ Settings")
+    st.header("Settings")
 
     page = st.radio(
         "Navigate",
-        options=["🩺 Predict", "📊 Dataset", "🚀 Train"],
+        options=["Predict", "Dataset", "Train"],
         index=0,
     )
 
@@ -117,11 +116,11 @@ with st.sidebar:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# PAGE: 🩺 Predict
+# PAGE: Predict
 # ═══════════════════════════════════════════════════════════════════════════
 
-if page == "🩺 Predict":
-    st.title("🧬 Down Syndrome Detection")
+if page == "Predict":
+    st.title("Down Syndrome Detection")
     st.markdown(
         "Upload a facial photograph and the CNN will predict whether "
         "indicators of Down syndrome are present."
@@ -173,13 +172,13 @@ if page == "🩺 Predict":
                         overlay, _, _ = compute_gradcam_for_image(
                             model, preprocessed_image, target_layer, gradcam_opacity,
                         )
-                        st.subheader("🔥 Grad-CAM")
+                        st.subheader("Grad-CAM")
                         st.image(overlay, clamp=True, use_container_width=True)
                 except Exception as e:
                     st.warning(f"Grad-CAM unavailable: {e}")
 
         with col_results:
-            st.subheader("🩺 Prediction")
+            st.subheader("Prediction")
 
             if is_down_syndrome:
                 st.error(f"**{predicted_label}**")
@@ -201,19 +200,19 @@ if page == "🩺 Predict":
 
             st.divider()
             st.caption(
-                "⚠️ **Disclaimer** — This tool is a research prototype and "
+                "**Disclaimer** — This tool is a prototype and "
                 "is NOT a substitute for professional medical diagnosis."
             )
     else:
-        st.info("👆 Upload a facial image to get started.")
+        st.info("Upload a facial image to get started.")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# PAGE: 📊 Dataset
+# PAGE: Dataset
 # ═══════════════════════════════════════════════════════════════════════════
 
-elif page == "📊 Dataset":
-    st.title("📊 Dataset Explorer")
+elif page == "Dataset":
+    st.title("Dataset Explorer")
     st.markdown("Browse the class distributions and sample images from each split.")
 
     split_tabs = st.tabs(["Train", "Validation", "Test"])
@@ -270,16 +269,16 @@ elif page == "📊 Dataset":
                         st.warning(f"Missing: {row['filename']}")
 
             # ---- Raw CSV preview --------------------------------------
-            with st.expander("📄 View raw CSV labels"):
+            with st.expander("View raw CSV labels"):
                 st.dataframe(labels_df, use_container_width=True, height=300)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# PAGE: 🚀 Train
+# PAGE: Train
 # ═══════════════════════════════════════════════════════════════════════════
 
-elif page == "🚀 Train":
-    st.title("🚀 Train Model")
+elif page == "Train":
+    st.title("Train Model")
     st.markdown("Configure and launch training directly from the browser.")
 
     col_cfg1, col_cfg2 = st.columns(2)
@@ -305,7 +304,7 @@ elif page == "🚀 Train":
 
     st.divider()
 
-    if st.button("▶️ Start Training", type="primary", use_container_width=True):
+    if st.button("Start Training", type="primary", use_container_width=True):
         # Import here to avoid loading TF on every page render
         from src.train import run_training
 
@@ -318,7 +317,7 @@ elif page == "🚀 Train":
                 learning_rate=training_learning_rate,
             )
 
-        st.success("✅ Training complete!")
+        st.success("Training complete!")
 
         # Show test metrics
         st.subheader("Test Set Results")
