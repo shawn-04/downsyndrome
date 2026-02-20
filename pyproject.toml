@@ -3,7 +3,7 @@ name = "down-syndrome-cnn"
 version = "0.1.0"
 description = "Binary classification of facial images for Down Syndrome detection using CNNs with TensorFlow/Keras."
 readme = "README.md"
-requires-python = ">=3.10,<3.13"   # TensorFlow has no wheels for 3.13+
+requires-python = ">=3.10,<3.13"   
 license = { text = "MIT" }
 authors = [
     { name = "Your Name", email = "you@example.com" },
